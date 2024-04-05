@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calificaciones Hoteles</title>
+    <link rel="stylesheet" href="/../static/css/style.css">
+</head>
+<body>
+<div class="header">
+    <div><img class="logo" src="/../static/images/logo.jpg" alt=""></div>
+    <div><p>Calificaciones Hoteles</p></div>
+    <div><img class="telefono" src="/../static/images/telefono.png" alt=""> <p>+506 5467 0937</p></div>
+</div>
+
+<form action="#" th:action="@{/presentation/calificacion/add}"
+    method="post" th:object="${calificacion}">
+    <div>
+        <div>
+            <span> Nombre</span>
+        </div>
+        <input type="text" th:field="*{nombre}">
+        <div
+            th:if="${#fields.hasErrors('nombre')}"
+            th:errors="*{nombre}"> Error
+        </div>
+    </div>
+    <div>
+        <div>
+            <span> Comentario</span>
+        </div>
+        <input type="text" th:field="*{comentario}">
+        <div
+                th:if="${#fields.hasErrors('comentario')}"
+                th:errors="*{comentario}"> Error
+        </div>
+
+    </div>
+</form>
+
+
+</body>
+<div class="footer">
+    Total Soft Inc
+</div>
+</html>
