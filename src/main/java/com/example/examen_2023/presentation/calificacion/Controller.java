@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -16,7 +17,7 @@ public class Controller {
     @Autowired
     private Service service;
 
-    @PostMapping("/presentation/Calificacion/show")
+    @GetMapping("/presentation/Calificacion/show")
     public String show() {
         return "presentation/calificacion/view";
     }
