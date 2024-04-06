@@ -188,3 +188,45 @@ tr:hover {
 
 
 /*Raquel */
+/*OCULTA SUBMENU*/
+.filasInfo th.score div.comment-box{
+    display: none;
+    position: absolute;
+    background-color: #fff;
+}
+.filasInfo th:hover div.comment-box{
+    display: block;
+}
+.comment-box {
+    display: block;
+    max-height: 100px; /* Altura máxima del cuadro de comentarios */
+    overflow-y: scroll; /* Añade un scroll vertical cuando se excede la altura máxima */
+    border: 1px solid #ccc; /* Borde alrededor del cuadro de comentarios */
+    padding: 5px;
+    max-width: 200px;
+}
+.center{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 50px;
+}
+.img-Hotel{
+    height: 150px;
+    width: auto;
+}
+.score{
+    margin-top: 80px;
+}
+li span{
+    font-weight: normal;
+}
+
+.filasInfo{
+    display: flex;
+}
+.filasInfo th{
+    display: block;
+    text-decoration: none;
+    padding:10px 90px;
+}

@@ -24,15 +24,15 @@ public class Service {
         return hotelRepository.findById(id);
     }
 
-    public List<Hotel> findTop3() {
+    public Iterable<Hotel> findTop3() {
         return hotelRepository.findTop3();
     }
 
-    public List<Hotel> findByNombre(String nombre) {
+    public Iterable<Hotel> findByNombre(String nombre) {
         return hotelRepository.findByNombre(nombre);
     }
 
-    public List<Hotel> findAll() {
+    public Iterable<Hotel> findAll() {
         return hotelRepository.findAll();
     }
 

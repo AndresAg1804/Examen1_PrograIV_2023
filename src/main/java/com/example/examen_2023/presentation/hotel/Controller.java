@@ -13,30 +13,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 @org.springframework.stereotype.Controller("Hotel")
-@SessionAttributes({"hoteles","hotelEdit","hotelSearch"})
+@SessionAttributes({"hoteles","hotelSearch"})
 public class Controller {
     @Autowired
     private Service service;
 
     @ModelAttribute("hoteles") public Iterable<Hotel> hoteles() {return new ArrayList<Hotel>();}
     @ModelAttribute("hotelSearch") public Hotel hotelSearch() {return new Hotel();}
-    @ModelAttribute("hotelEdit") public Hotel hotelEdit() {return new Hotel();}
 
-    @GetMapping("/")
+    @GetMapping(value = {"/presentation/Hotel/show","/"})
     public String show(HttpSession session, Model model){
-        if(session.getAttribute("hoteles")==null){
-            session.setAttribute("hoteles", service.findTop3());
-            model.addAttribute("hoteles", service.findAll());
-            //session.setAttribute("hoteles", service.findTop3());
+        if(!hotelSearch().getNombre().isEmpty() || session.getAttribute("hoteles")==null){
+            model.addAttribute("hoteles",service.findAll());
+            session.setAttribute("hoteles",service.findAll());
         }
         return "/presentation/hotel/view";
-    }
-
-    @PostMapping("/presentation/hotel/calificar")
-    public String calificar(@ModelAttribute("hotelEdit") Hotel hotelEdit, HttpSession httpSession, Model model){
-        httpSession.setAttribute("hotelEdit", hotelEdit);
-        model.addAttribute("hotelEdit", hotelEdit);
-        return "/presentation/calificacion/view";
     }
 
     @GetMapping("/presentation/Hotel/top3")
@@ -49,18 +40,10 @@ public class Controller {
     }
 
     @PostMapping("/presentation/Hotel/search")
-    public String search(@ModelAttribute("hotelSearch") Hotel hotelSearch, Model model, HttpSession session){
-        if (hotelSearch.getNombre() == "") {
-            model.addAttribute("hoteles", service.findTop3());
-            session.setAttribute("hoteles", service.findTop3());
-        }
-        else{
-            model.addAttribute("hoteles", service.findByNombre(hotelSearch.getNombre()));
-            session.setAttribute("hoteles", service.findByNombre(hotelSearch.getNombre()));
-        }
-        model.addAttribute("hotelEdit", new Hotel());
-        session.setAttribute("hotelEdit", new Hotel());
-        return "/presentation/hotel/view";
+    public String search(
+            @ModelAttribute("hotelSearch") Hotel hotelSearch, Model model){
+        model.addAttribute("hoteles",service.findByNombre(hotelSearch.getNombre()));
+        return "redirect:/presentation/hotel/show";
     }
 
 }

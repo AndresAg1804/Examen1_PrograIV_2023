@@ -15,12 +15,12 @@
         <div class="table-container">
             <form action="presentation/Hotel/search" th:object="${hotelSearch}" method="post">
                 <input type="text" th:field="*{nombre}" id="search" name="nombre" placeholder="Buscar...">
-                <span><input type="submit" name="Buscar" value="Buscar"> </span>
-                <a href="/presentation/hotel/top3">
+                <span><button type="submit">Buscar</button> </span>
+                <a href="/presentation/Hotel/top3">
                     <img src="/../static/images/top3.jpg" alt="hotel" id="top3">
                 </a>
             </form>
-            <table>
+            <table class="table">
                 <tr class="filasInfo">
                     <th>Hotel</th>
                     <th>Calificacion</th>
@@ -29,7 +29,7 @@
                 <tr class="filasInfo" th:each="h: ${hoteles}">
                     <th>
                         <span th:text="${h.getNombre()}"></span>
-                        <img class="img-Hotel" th:src="@{'/images/' + ${h.getId()} + '.jpg'}">
+<!--                        <img class="img-Hotel" th:src="@{'/images/' + ${h.getId()} + '.jpg'}">-->
                     </th>
                     <th class="score">
                         <span th:text="${h.calificacion()}"></span>
@@ -47,7 +47,7 @@
                         </div>
                     </th>
                     <th class="score">
-                        <a th:href="@{'/presentation//show?idHotel=' + ${h.getId()}}"><img class="comentario" th:src="@{/images/agregar.png}"></a>
+                        <a th:href="@{'/presentation/Calificacion/show?id=' + ${h.getId()}}"><img class="comentario" th:src="@{/images/agregar.png}"></a>
                     </th>
                 </tr>
             </table>
