@@ -12,9 +12,46 @@
         <div><img class="telefono" src="/../static/images/telefono.png" alt=""> <p>+506 5467 0937</p></div>
     </div>
     <div class="body">
-        <form action="#" th:action="@{presentation/hotel/search}" method="post">
-<!--            <input type="search" >-->
-        </form>
+        <div class="table-container">
+            <form action="presentation/Hotel/search" th:object="${hotelSearch}" method="post">
+                <input type="text" th:field="*{nombre}" id="search" name="nombre" placeholder="Buscar...">
+                <span><input type="submit" name="Buscar" value="Buscar"> </span>
+                <a href="/presentation/hotel/top3">
+                    <img src="/../static/images/top3.jpg" alt="hotel" id="top3">
+                </a>
+            </form>
+            <table>
+                <tr class="filasInfo">
+                    <th>Hotel</th>
+                    <th>Calificacion</th>
+                    <th>...</th>
+                </tr>
+                <tr class="filasInfo" th:each="h: ${hoteles}">
+                    <th>
+                        <span th:text="${h.getNombre()}"></span>
+                        <img class="img-Hotel" th:src="@{'/images/' + ${h.getId()} + '.jpg'}">
+                    </th>
+                    <th class="score">
+                        <span th:text="${h.calificacion()}"></span>
+                        <div class="comment-box">
+                            <ul>
+                                <li th:each="Calificacion: ${h.getCalificaciones()}">
+                                    <strong>Puntaje: </strong>
+                                    <span th:text="${Calificacion.getPuntaje()}"></span><br>
+                                    <strong>Nombre: </strong>
+                                    <span th:text="${Calificacion.getNombre()}"></span><br>
+                                    <strong>Comentario: </strong>
+                                    <span th:text="${Calificacion.comentario}"></span><br>
+                                </li>
+                            </ul>
+                        </div>
+                    </th>
+                    <th class="score">
+                        <a th:href="@{'/presentation//show?idHotel=' + ${h.getId()}}"><img class="comentario" th:src="@{/images/agregar.png}"></a>
+                    </th>
+                </tr>
+            </table>
+        </div>
     </div>
 
 

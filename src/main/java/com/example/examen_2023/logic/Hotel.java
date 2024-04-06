@@ -2,6 +2,7 @@ package com.example.examen_2023.logic;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Hotel {
     String id;
@@ -47,6 +48,28 @@ public class Hotel {
     }
 
     public double calificacion(){
-        return calificaciones.stream().mapToInt(Calificacion::getPuntaje).average().orElse(0);
+        return calificaciones.stream().mapToDouble(Calificacion::getPuntaje).average().orElse(0);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Hotel hotel = (Hotel) o;
+        return Objects.equals(id, hotel.id) && Objects.equals(nombre, hotel.nombre) && Objects.equals(calificaciones, hotel.calificaciones);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nombre, calificaciones);
+    }
+
+    @Override
+    public String toString() {
+        return "Hotel{" +
+                "id='" + id + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", califaciones=" + calificaciones +
+                '}';
     }
 }

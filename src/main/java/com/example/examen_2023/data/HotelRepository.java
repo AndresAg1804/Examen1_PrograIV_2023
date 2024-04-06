@@ -37,11 +37,11 @@ public class HotelRepository {
     public HotelRepository(){
         hoteles= new ArrayList<Hotel>();
         Hotel h;
-        h = new Hotel("111", "Las Hortencias");
+        h = new Hotel("111.jpg", "Las Hortencias");
         h.getCalificaciones().add(new Calificacion("Juan Bravo", "No me gustó la comida", 1));
         h.getCalificaciones().add(new Calificacion("Felix", "Todo Excelente", 5));
         hoteles.add(h);
-        h = new Hotel("222", "Cocles");
+        h = new Hotel("222.jpg", "Cocles");
         h.getCalificaciones().add(new Calificacion("Curtis Douglas", "Clean and charm but expensive", 4));
         hoteles.add(h);
     }

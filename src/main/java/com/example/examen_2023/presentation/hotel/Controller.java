@@ -9,45 +9,58 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @org.springframework.stereotype.Controller("Hotel")
+@SessionAttributes({"hoteles","hotelEdit","hotelSearch"})
 public class Controller {
     @Autowired
     private Service service;
 
+    @ModelAttribute("hoteles") public Iterable<Hotel> hoteles() {return new ArrayList<Hotel>();}
+    @ModelAttribute("hotelSearch") public Hotel hotelSearch() {return new Hotel();}
+    @ModelAttribute("hotelEdit") public Hotel hotelEdit() {return new Hotel();}
+
     @GetMapping("/")
-    public String show(HttpSession session) {
-        List<Hotel> hotelList= null;
-        hotelList=(List<Hotel>) session.getAttribute("LHoteles");
-        if(hotelList ==null){
-            hotelList = service.findTop3();
+    public String show(HttpSession session, Model model){
+        if(session.getAttribute("hoteles")==null){
+            session.setAttribute("hoteles", service.findTop3());
+            model.addAttribute("hoteles", service.findAll());
+            //session.setAttribute("hoteles", service.findTop3());
         }
-        session.setAttribute("LHoteles", hotelList);
-        return "presentation/hotel/view";
+        return "/presentation/hotel/view";
     }
 
-    @PostMapping("/presentation/Hotel/add")
-    public String add(@ModelAttribute(name="hotelEdit", binding =false)Hotel hotelEdit,
-                      @ModelAttribute("calificacion") @Valid Calificacion calificacion,
-                      BindingResult result, Model model) {
-        if(result.hasErrors()) {
-            return "/presentation/hotel/view";
-        }
-        service.addCalificacion(hotelEdit.getId(), calificacion);
-        return "redirect:/presentation/hoteles/top3";
+    @PostMapping("/presentation/hotel/calificar")
+    public String calificar(@ModelAttribute("hotelEdit") Hotel hotelEdit, HttpSession httpSession, Model model){
+        httpSession.setAttribute("hotelEdit", hotelEdit);
+        model.addAttribute("hotelEdit", hotelEdit);
+        return "/presentation/calificacion/view";
     }
 
     @GetMapping("/presentation/Hotel/top3")
-    public String top3(HttpSession session) {
+    public String top3(HttpSession session,Model model) {
         session.setAttribute("hoteles", service.findTop3());
+        session.setAttribute("hotelEdit", new Hotel());
+        model.addAttribute("hoteles", service.findTop3());
+        model.addAttribute("hotelEdit", new Hotel());
         return "/presentation/hotel/view";
     }
 
     @PostMapping("/presentation/Hotel/search")
-    public String search(@RequestParam("hotelSearch") Hotel hotelSearch, HttpSession session){
-        session.setAttribute("hoteles",service.findByNombre(hotelSearch.getNombre()));
-        return "presentation/hotel/view";
+    public String search(@ModelAttribute("hotelSearch") Hotel hotelSearch, Model model, HttpSession session){
+        if (hotelSearch.getNombre() == "") {
+            model.addAttribute("hoteles", service.findTop3());
+            session.setAttribute("hoteles", service.findTop3());
+        }
+        else{
+            model.addAttribute("hoteles", service.findByNombre(hotelSearch.getNombre()));
+            session.setAttribute("hoteles", service.findByNombre(hotelSearch.getNombre()));
+        }
+        model.addAttribute("hotelEdit", new Hotel());
+        session.setAttribute("hotelEdit", new Hotel());
+        return "/presentation/hotel/view";
     }
 
 }

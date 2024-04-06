@@ -11,6 +11,15 @@
 
 }
 
+.caption{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10%;
+    background-color: cornsilk;
+    text-align: center;
+}
+
 .header p:first-child{
     margin: 0;
     text-align: left;
@@ -46,13 +55,68 @@
 
 }
 
-/*.header h1 {*/
-/*    color: black;*/
-/*    font-size: 24px;*/
-/*    margin: 0;*/
-/*}*/
+#calificacion{
+    /*display: flex;*/
+    vertical-align: top;
+    display: flow;
+    justify-content: center;
+    margin: 0;
+    background-color: cornsilk;
+    align-items: center;
+    text-align: center;
+    font-size: x-large;
+}
 
-/* Footer */
+/*Marcos*/
+.calificaciones ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.calificaciones ul li {
+    padding: 5px;
+    border-bottom: 1px solid #ccc;
+}
+
+.calificaciones {
+    display: none;
+    position: absolute;
+    background-color: lightblue;
+    border: 1px solid #ccc;
+    padding: 10px;
+    z-index: 1;
+    overflow: auto;
+    max-height: 50px;
+    max-width: 200px;
+}
+
+.icono-container:hover .calificaciones {
+    display: block;
+}
+
+.table-container,
+.form-container {
+    display: inline-block;
+    width: 80%; /* Ancho ajustado para dejar espacio entre los elementos */
+    vertical-align: top; /* Alinear los elementos en la parte superior */
+    margin-right: 2%; /* Espacio entre la tabla y el formulario */
+}
+
+.table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    padding: 2px;
+    text-align: center;
+    border-bottom: 1px solid gray;
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+}
 
 .footer {
     background-color: #ff8c00;
@@ -69,6 +133,58 @@
 }
 
 .body{
-    margin: 0;
-    display: flex;
+    /*margin: auto;*/
+    display: block;
+    margin: 200px;
+    align-items: center;
+    text-align: center;
+    /*background-color: darkorange;*/
 }
+
+#top3{
+    width: 30px;
+    border-radius: 20%;
+}
+
+.icono {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin-left: -100px;
+    vertical-align: middle; /* Alineación vertical */
+}
+
+#suma{
+    width: 30px;
+    border-radius: 20%;
+}
+
+.form {
+    max-width: 800px;
+    border-radius: 10px;
+    width: 100%;
+}
+
+.form div {
+    margin-bottom: 10px;
+}
+
+.form div div {
+    margin-bottom: 5px;
+}
+
+.form div label {
+    display: block;
+    width: 100px;
+    text-align: right;
+    margin-right: 10px;
+}
+
+.form div input[type="text"] {
+    width: calc(100% - 160px);
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+
+/*Raquel */

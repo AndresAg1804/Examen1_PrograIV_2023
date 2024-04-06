@@ -20,6 +20,10 @@ public class Service {
         }
     }
 
+    public Hotel findById(String id) {
+        return hotelRepository.findById(id);
+    }
+
     public List<Hotel> findTop3() {
         return hotelRepository.findTop3();
     }
@@ -31,5 +35,7 @@ public class Service {
     public List<Hotel> findAll() {
         return hotelRepository.findAll();
     }
+
+
 
 }

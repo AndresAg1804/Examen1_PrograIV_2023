@@ -12,32 +12,55 @@
     <div><img class="telefono" src="/../static/images/telefono.png" alt=""> <p>+506 5467 0937</p></div>
 </div>
 
-<form action="#" th:action="@{/presentation/calificacion/add}"
-    method="post" th:object="${calificacion}">
-    <div>
+<div class="body">
+    <h2>Calificar Hotel</h2>
+    <form action="#" th:action="@{/presentation/calificacion/add}"
+        method="post" th:object="${calificacion}" id="calificacion">
+        <div class="hotel-info">
+            <p th:text="Calificacion+ ' ' + del + ' '+Hotel + ' '+ ${hotelEdit.nombre}" class="hotel-name"></p>
+            <img th:src="${'../../../static/images/'+ hotelEdit.id}" alt="hotel" class = "hotel-image">
+        </div>
         <div>
-            <span> Nombre</span>
+            <div>
+                <span> Nombre</span>
+            </div>
+            <input type="text" th:field="*{nombre}">
+<!--            <div-->
+<!--                th:if="${#fields.hasErrors('nombre')}"-->
+<!--                th:errors="*{nombre}"> Error-->
+<!--            </div>-->
         </div>
-        <input type="text" th:field="*{nombre}">
-        <div
-            th:if="${#fields.hasErrors('nombre')}"
-            th:errors="*{nombre}"> Error
-        </div>
-    </div>
-    <div>
         <div>
-            <span> Comentario</span>
+            <div>
+                <label> Comentario</label>
+            </div>
+            <input type="text" th:field="*{comentario}">
+<!--            <div-->
+<!--                th:if="${#fields.hasErrors('comentario')}"-->
+<!--                th:errors="*{comentario}"> Error-->
+<!--            </div>-->
+
         </div>
-        <input type="text" th:field="*{comentario}">
-        <div
-                th:if="${#fields.hasErrors('comentario')}"
-                th:errors="*{comentario}"> Error
+        <div>
+            <div>
+                <label> Puntuacion</label>
+            </div>
+            <input type="text" th:field="*{puntaje}">
+<!--            <div-->
+<!--                    th:if="${#fields.hasErrors('puntaje')}"-->
+<!--                    th:errors="*{puntaje}"> Error-->
+<!--            </div>-->
+        </div>
+        <div>
+            <button type="submit">Calificar</button>
+        </div>
+        <div>
+            <a href="/presentation/Hotel/search">Volver</a>
         </div>
 
-    </div>
-</form>
+    </form>
 
-
+</div>
 </body>
 <div class="footer">
     Total Soft Inc

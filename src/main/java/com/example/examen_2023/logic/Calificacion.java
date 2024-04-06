@@ -48,6 +48,9 @@ public class Calificacion {
         this.puntaje = puntaje;
     }
 
+    public String mostrarCalificacion(){
+        return "-" + nombre + " " + "(" +puntaje+ ")" + " " + comentario;
+    }
 
 
 }
